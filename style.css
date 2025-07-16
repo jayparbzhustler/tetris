@@ -1,0 +1,96 @@
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.game-container {
+    display: flex;
+    align-items: flex-start;
+    border: 3px solid #333;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #1e1e1e;
+}
+
+canvas {
+    border: 2px solid #333;
+    background-color: #000;
+}
+
+.info {
+    margin-left: 20px;
+    text-align: center;
+}
+
+#next {
+    background-color: #1e1e1e;
+    border-color: #1e1e1e;
+}
+
+.game-over-overlay {
+    display: flex; /* Show by default */
+    position: fixed; /* Cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black */
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.game-over-message {
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    border: 3px solid #333;
+}
+
+.game-over-message h2 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+#start-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#start-button:hover {
+    background-color: #45a049;
+}
+
+#pause-button {
+    background-color: #ffc107; /* Amber */
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+#pause-button:hover {
+    background-color: #ffb300;
+}
