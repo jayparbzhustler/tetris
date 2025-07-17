@@ -98,13 +98,17 @@ canvas {
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
-        height: auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
         padding: 10px;
+        box-sizing: border-box;
     }
 
     h1 {
         font-size: 1.5em;
         margin-bottom: 10px;
+        flex-shrink: 0;
     }
 
     .game-container {
@@ -112,39 +116,45 @@ canvas {
         align-items: center;
         border: none;
         padding: 0;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
     }
 
     canvas#tetris {
-        width: 90vw;
-        height: 180vw; /* Maintain 1:2 aspect ratio */
-        max-width: 400px; /* Max width for larger phones */
-        max-height: 800px;
+        aspect-ratio: 1 / 2;
+        max-width: 90vw;
+        max-height: 60vh; /* Adjusted height */
+        width: auto;
+        height: auto;
+        border: 1px solid #333;
     }
 
     .info {
         margin-left: 0;
-        margin-top: 20px;
+        margin-top: 15px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
         width: 90vw;
         max-width: 400px;
+        flex-shrink: 0;
     }
 
     .info h2 {
         font-size: 1em;
-        margin: 0 10px;
+        margin: 0 5px;
     }
 
     #next {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
     }
 
     #pause-button {
         margin-top: 0;
-        padding: 12px 24px;
+        padding: 10px 20px;
     }
 
     .game-over-message {
