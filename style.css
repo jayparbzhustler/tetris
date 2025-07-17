@@ -94,3 +94,117 @@ canvas {
 #pause-button:hover {
     background-color: #ffb300;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+        border: none;
+        padding: 0;
+    }
+
+    canvas#tetris {
+        width: 90vw;
+        height: 180vw; /* Maintain 1:2 aspect ratio */
+        max-width: 400px; /* Max width for larger phones */
+        max-height: 800px;
+    }
+
+    .info {
+        margin-left: 0;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 90vw;
+        max-width: 400px;
+    }
+
+    .info h2 {
+        font-size: 1em;
+        margin: 0 10px;
+    }
+
+    #next {
+        width: 60px;
+        height: 60px;
+    }
+
+    #pause-button {
+        margin-top: 0;
+        padding: 12px 24px;
+    }
+
+    .game-over-message {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .game-over-message h2 {
+        font-size: 2em;
+    }
+
+    #start-button {
+        padding: 12px 24px;
+        font-size: 1em;
+    }
+}
+
+.controls {
+    display: none; /* Hidden by default, shown in media query */
+    margin-top: 20px;
+    text-align: center;
+}
+
+.controls button {
+    background-color: #333;
+    color: white;
+    border: 2px solid #555;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.controls button:active {
+    background-color: #555;
+}
+
+/* Show controls only on smaller screens */
+@media (max-width: 768px) {
+    .controls {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 10px;
+        width: 90vw;
+        max-width: 300px;
+        margin-top: 15px;
+    }
+
+    #left-btn { grid-column: 1; grid-row: 2; }
+    #rotate-btn { grid-column: 2; grid-row: 1; }
+    #right-btn { grid-column: 3; grid-row: 2; }
+    #down-btn { grid-column: 2; grid-row: 2; }
+    #drop-btn { grid-column: 1 / span 3; grid-row: 3; width: 100%; border-radius: 10px; } /* Make it wider */
+
+    /* Hide swipe instructions if buttons are visible */
+    .swipe-instructions {
+        display: none;
+    }
+}

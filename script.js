@@ -301,6 +301,7 @@ function startGame() {
 }
 
 document.addEventListener('keydown', event => {
+    if (isGameOver || isPaused) return;
     switch (event.keyCode) {
         case 37: // Left
             playerMove(-1);
@@ -324,6 +325,92 @@ document.addEventListener('keydown', event => {
             break;
     }
 });
+
+// Touch controls
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+const touchZone = canvas;
+
+touchZone.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+}, { passive: false });
+
+touchZone.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    touchEndX = e.touches[0].clientX;
+    touchEndY = e.touches[0].clientY;
+}, { passive: false });
+
+touchZone.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    handleSwipe();
+}, { passive: false });
+
+function handleSwipe() {
+    if (isGameOver || isPaused) return;
+
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    const absDeltaX = Math.abs(deltaX);
+    const absDeltaY = Math.abs(deltaY);
+
+    // If it's more of a vertical swipe
+    if (absDeltaY > absDeltaX) {
+        if (deltaY > 50) { // Swipe Down
+            playerDrop();
+        } else if (deltaY < -50) { // Swipe Up
+            playerHardDrop();
+        }
+    }
+    // If it's more of a horizontal swipe
+    else if (absDeltaX > absDeltaY) {
+        if (deltaX > 50) { // Swipe Right
+            playerMove(1);
+        } else if (deltaX < -50) { // Swipe Left
+            playerMove(-1);
+        }
+    }
+    // If it's a tap (very little movement)
+    else if (absDeltaX < 10 && absDeltaY < 10) {
+        playerRotate(1);
+    }
+
+    // Reset touch coordinates
+    touchStartX = 0;
+    touchStartY = 0;
+    touchEndX = 0;
+    touchEndY = 0;
+}
+
+// Button controls
+const leftBtn = document.getElementById('left-btn');
+const rightBtn = document.getElementById('right-btn');
+const rotateBtn = document.getElementById('rotate-btn');
+const downBtn = document.getElementById('down-btn');
+const dropBtn = document.getElementById('drop-btn');
+
+if (leftBtn) {
+    leftBtn.addEventListener('click', () => {
+        if (!isGameOver && !isPaused) playerMove(-1);
+    });
+    rightBtn.addEventListener('click', () => {
+        if (!isGameOver && !isPaused) playerMove(1);
+    });
+    rotateBtn.addEventListener('click', () => {
+        if (!isGameOver && !isPaused) playerRotate(1);
+    });
+    downBtn.addEventListener('click', () => {
+        if (!isGameOver && !isPaused) playerDrop();
+    });
+    dropBtn.addEventListener('click', () => {
+        if (!isGameOver && !isPaused) playerHardDrop();
+    });
+}
 
 context.scale(BLOCK_SIZE, BLOCK_SIZE);
 nextContext.scale(BLOCK_SIZE, BLOCK_SIZE);
